@@ -1,5 +1,8 @@
 import { LocalStorageAdapter } from '@/infra/cache/LocalStorageAdapter'
-import { setLastPodcastListRequestAdapter, getLastPodcastListRequestAdapter } from '.'
+import {
+  setLastPodcastListRequestAdapter,
+  getLastPodcastListRequestAdapter,
+} from '.'
 
 jest.mock('@/infra/cache/LocalStorageAdapter')
 
