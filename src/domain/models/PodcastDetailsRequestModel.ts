@@ -1,6 +1,6 @@
-import { PodcastDetailsModel } from '.'
+import { PodcastArtistModel, PodcastDetailsModel } from '.'
 
 export type PodcastDetailsRequestModel = {
   resultCount: number
-  results: Array<PodcastDetailsModel>
+  results: Array<PodcastArtistModel | PodcastDetailsModel>
 }
