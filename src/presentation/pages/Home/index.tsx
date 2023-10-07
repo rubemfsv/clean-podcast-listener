@@ -1,17 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import { IGetPodcastList } from '@/domain/usecases'
+import { Template } from '@/presentation/components'
 
 import Styles from './styles.scss'
-import { IGetPodcastList } from '@/domain/usecases'
 
 type HomeProps = {
   podcastList: IGetPodcastList
 }
 
 const Home: React.FC<HomeProps> = ({ podcastList }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
   return (
-    <div className={Styles.container}>
-      <span>Hello World</span>
-    </div>
+    <Template showHomeIcon={false} isLoading={isLoading}>
+      <span>Hello World!</span>
+    </Template>
   )
 }
 
