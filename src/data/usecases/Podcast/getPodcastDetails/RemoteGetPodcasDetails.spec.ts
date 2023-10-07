@@ -1,21 +1,21 @@
 import {
-  RemoteGetPodcastList,
-  RemoteGetPodcastListNamespace,
-} from './RemoteGetPodcastList'
+  RemoteGetPodcastDetails,
+  RemoteGetPodcastDetailsNamespace,
+} from './RemoteGetPodcastDetails'
 import { HttpClientSpy } from '@/data/test'
 import { HttpStatusCode } from '@/data/protocols/http/'
-import { mockGetPodcastListModel } from '@/domain/test/'
+import { mockGetPodcastDetailsModel } from '@/domain/test/'
 import { UnexpectedError } from '@/domain/errors/'
 import faker from 'faker'
 
 type SutTypes = {
-  systemUnderTest: RemoteGetPodcastList
-  httpClientSpy: HttpClientSpy<RemoteGetPodcastListNamespace.Model>
+  systemUnderTest: RemoteGetPodcastDetails
+  httpClientSpy: HttpClientSpy<RemoteGetPodcastDetailsNamespace.Model>
 }
 
 const makeSystemUnderTest = (url: string = faker.internet.url()): SutTypes => {
-  const httpClientSpy = new HttpClientSpy<RemoteGetPodcastListNamespace.Model>()
-  const systemUnderTest = new RemoteGetPodcastList(url, httpClientSpy)
+  const httpClientSpy = new HttpClientSpy<RemoteGetPodcastDetailsNamespace.Model>()
+  const systemUnderTest = new RemoteGetPodcastDetails(url, httpClientSpy)
 
   return {
     systemUnderTest,
@@ -23,25 +23,25 @@ const makeSystemUnderTest = (url: string = faker.internet.url()): SutTypes => {
   }
 }
 
-describe('RemoteGetPodcastList', () => {
+describe('RemoteGetPodcastDetails', () => {
   test('Should call HttpClient with correct values', async () => {
     const url = faker.internet.url()
     const { systemUnderTest, httpClientSpy } = makeSystemUnderTest(url)
 
-    await systemUnderTest.getList()
+    await systemUnderTest.getDetails()
 
     expect(httpClientSpy.url).toBe(url)
     expect(httpClientSpy.method).toBe('get')
   })
 
-  test('Should return an PodcastList.Model if HttpPostClient returns 200', async () => {
+  test('Should return an PodcastDetails.Model if HttpPostClient returns 200', async () => {
     const { systemUnderTest, httpClientSpy } = makeSystemUnderTest()
-    const httpResult = mockGetPodcastListModel()
+    const httpResult = mockGetPodcastDetailsModel()
     httpClientSpy.response = {
       statusCode: HttpStatusCode.ok,
       body: httpResult,
     }
-    const Message = await systemUnderTest.getList()
+    const Message = await systemUnderTest.getDetails()
     expect(Message).toEqual(httpResult)
   })
 
@@ -50,7 +50,7 @@ describe('RemoteGetPodcastList', () => {
     httpClientSpy.response = {
       statusCode: HttpStatusCode.badRequest,
     }
-    const promise = systemUnderTest.getList()
+    const promise = systemUnderTest.getDetails()
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
@@ -60,7 +60,7 @@ describe('RemoteGetPodcastList', () => {
     httpClientSpy.response = {
       statusCode: HttpStatusCode.forbidden,
     }
-    const promise = systemUnderTest.getList()
+    const promise = systemUnderTest.getDetails()
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
@@ -70,7 +70,7 @@ describe('RemoteGetPodcastList', () => {
     httpClientSpy.response = {
       statusCode: HttpStatusCode.notFound,
     }
-    const promise = systemUnderTest.getList()
+    const promise = systemUnderTest.getDetails()
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
@@ -80,7 +80,7 @@ describe('RemoteGetPodcastList', () => {
     httpClientSpy.response = {
       statusCode: HttpStatusCode.serverError,
     }
-    const promise = systemUnderTest.getList()
+    const promise = systemUnderTest.getDetails()
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
