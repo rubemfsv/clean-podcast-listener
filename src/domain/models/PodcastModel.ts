@@ -2,7 +2,7 @@ import { PodcastLabelModel, PodcastLinkModel } from './'
 
 export type PodcastModel = {
   'im:name': PodcastLabelModel
-  'im:image': Array<ImageDetails>
+  'im:image': Array<ImageDetailsModel>
   summary: PodcastLabelModel
   'im:price': {
     label: string
@@ -48,7 +48,7 @@ export type PodcastModel = {
   }
 }
 
-type ImageDetails = {
+export type ImageDetailsModel = {
   label: string
   attributes: {
     height: string
