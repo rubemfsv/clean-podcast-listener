@@ -14,7 +14,8 @@ type SutTypes = {
 }
 
 const makeSystemUnderTest = (url: string = faker.internet.url()): SutTypes => {
-  const httpClientSpy = new HttpClientSpy<RemoteGetPodcastDetailsNamespace.Model>()
+  const httpClientSpy =
+    new HttpClientSpy<RemoteGetPodcastDetailsNamespace.Model>()
   const systemUnderTest = new RemoteGetPodcastDetails(url, httpClientSpy)
 
   return {
