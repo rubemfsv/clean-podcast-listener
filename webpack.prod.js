@@ -49,7 +49,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new DefinePlugin({
-      'process.env.API_URL': JSON.stringify('your_prod_env_url'),
+      'process.env.API_URL': JSON.stringify('https://itunes.apple.com'),
     }),
     new HtmlWebpackPlugin({
       template: './template.prod.html',
