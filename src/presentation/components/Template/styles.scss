@@ -1,0 +1,35 @@
+@import '../../styles/colors.scss';
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $grey;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+
+  .title {
+    padding: 15px 0;
+    font-size: 24px;
+    color: $blue;
+    align-self: center;
+  }
+
+  .icon {
+    color: $blue;
+    height: 24px;
+    width: 24px;
+    &:hover {
+      cursor: pointer;
+      color: rgba($blue, 0.9);
+    }
+    &:first-child {
+      margin-right: 15px;
+    }
+  }
+}
+
+.content {
+  padding: 20px;
+}
