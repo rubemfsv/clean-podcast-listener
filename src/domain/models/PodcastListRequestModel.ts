@@ -1,6 +1,6 @@
-import { PodcastLabelModel, PodcastLinkModel, PodcastModel } from './'
+import { PodcastLabelModel, PodcastLinkModel, PodcastModel } from '.'
 
-export type PodcastRequestModel = {
+export type PodcastListRequestModel = {
   feed: {
     author: {
       name: PodcastLabelModel

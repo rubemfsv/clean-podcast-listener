@@ -1,9 +1,9 @@
-import { PodcastRequestModel } from '@/domain/models'
+import { PodcastListRequestModel } from '@/domain/models'
 
 export interface IGetPodcastList {
-  get: () => Promise<GetPodcastList.Model>
+  getList: () => Promise<GetPodcastList.Model>
 }
 
 export namespace GetPodcastList {
-  export type Model = PodcastRequestModel
+  export type Model = PodcastListRequestModel
 }
