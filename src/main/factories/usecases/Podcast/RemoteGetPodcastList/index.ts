@@ -10,4 +10,3 @@ export const makeRemoteGetPodcastList = (): IGetPodcastList => {
 
   return remoteGetPodcastList
 }
-
