@@ -20,13 +20,13 @@ table {
 
   tbody tr {
     &:hover {
-      background-color: $yellowMouseHover;
+      background-color: $grey;
     }
   }
 }
 
 body {
-  background-color: $yellow;
+  background-color: $white;
 }
 
 input[type='password'],
@@ -43,7 +43,7 @@ input[type='text'] {
   outline: none;
 
   &:focus {
-    border-color: $yellowAux;
+    border-color: $lightGrey;
   }
 }
 
