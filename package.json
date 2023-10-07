@@ -4,7 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index",
+    "dev:base": "webpack-dev-server --config webpack.dev.js",
+    "dev": "npm run dev:base -- --open",
+    "build": "webpack --config webpack.prod.js",
+    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test:watch": "npm test -- --watch",
+    "test:e2e": "node_modules/.bin/cypress open",
+    "postinstall": "npx husky install",
+    "format": "prettier --check --no-error-on-unmatched-pattern --ignore-path .gitignore . --ext ts,tsx,js,jsx,json,md",
+    "format:fix": "prettier --write --no-error-on-unmatched-pattern --ignore-path .gitignore . --ext ts,tsx,js,jsx,json,md"
   },
   "author": "rubemfsv",
   "license": "ISC",
