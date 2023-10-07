@@ -5,7 +5,7 @@ export type PodcastDetailsModel = {
   closedCaptioning: string
   collectionId: number
   collectionName: string
-  genres: Array<EpisodeGenre>
+  genres: Array<PodcastEpisodeGenreModel>
   episodeGuid: string
   description: string
   artworkUrl60: string
@@ -27,7 +27,7 @@ export type PodcastDetailsModel = {
   wrapperType: string
 }
 
-type EpisodeGenre = {
+export type PodcastEpisodeGenreModel = {
   name: string
   id: string
 }
