@@ -20,7 +20,7 @@ const Router: React.FC = () => {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={makeHome} />
-          <Route exact path="/:id" component={makePodcastDetails} />
+          <Route exact path="/podcast/:id" component={makePodcastDetails} />
         </Switch>
       </BrowserRouter>
     </ApiContext.Provider>
