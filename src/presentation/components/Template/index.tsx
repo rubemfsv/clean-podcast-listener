@@ -31,7 +31,7 @@ const Template: React.FC<TemplateProps> = ({
           <FaHome
             onClick={() => handleMenuRoute()}
             className={Styles.icon}
-            title="Log out"
+            title="Home"
           />
         )}
       </div>
