@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, render, RenderResult, screen } from '@testing-library/react'
+import { fireEvent, render, RenderResult } from '@testing-library/react'
 import { PodcastCard } from '@/presentation/components'
 import faker from 'faker'
 import { createMemoryHistory } from 'history'
