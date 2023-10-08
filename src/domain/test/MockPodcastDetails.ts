@@ -44,7 +44,7 @@ const mockPodcastDetailsModel = (): PodcastDetailsModel => ({
   wrapperType: faker.lorem.word(),
 })
 
-const mockPodcastArtistModel = (): PodcastArtistModel => ({
+export const mockPodcastArtistModel = (): PodcastArtistModel => ({
   ...mockPodcastDetailsModel(),
   artistName: faker.lorem.words(2),
   collectionCensoredName: faker.lorem.words(2),

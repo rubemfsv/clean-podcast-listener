@@ -33,7 +33,8 @@
       font-style: italic;
     }
   }
-  .episodeDescriptionContainer {
+  .itemContainer,
+  .lastItemContainer {
     display: flex;
     flex-direction: column;
     padding: 20px 15px;
@@ -45,5 +46,9 @@
     span:last-child {
       font-style: italic;
     }
+  }
+
+  .lastItemContainer {
+    border-top: 1px solid rgba($lightGrey, 0.6);
   }
 }
