@@ -1,0 +1,45 @@
+@import '../../styles/colors.scss';
+
+.podcastContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 220px;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  img {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    z-index: 2;
+  }
+  .infoContainer {
+    width: 220px;
+    padding: 10px;
+    padding-top: 70px;
+    display: flex;
+    height: 120px;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    border: 2px solid rgba($lightGrey, 0.6);
+    box-shadow: 5px 5px 10px rgba($grey, 0.5);
+
+    border-radius: 4px;
+    span {
+      color: $black;
+    }
+    span:first-child {
+      text-transform: uppercase;
+    }
+    span:last-child {
+      color: $grey;
+    }
+  }
+}
