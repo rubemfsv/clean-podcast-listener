@@ -1,4 +1,4 @@
-export { default as EpisodeCard } from './EpisodeCard'
+export { default as ArtistCard } from './ArtistCard'
 export { default as Input } from './Input'
 export { default as PodcastCard } from './PodcastCard'
 export { default as Spinner } from './Spinner'

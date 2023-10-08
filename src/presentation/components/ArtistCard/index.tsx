@@ -7,7 +7,7 @@ type EpisodeCardProps = {
   artist: PodcastArtistModel
 }
 
-const EpisodeCard: React.FC<EpisodeCardProps> = (props: EpisodeCardProps) => {
+const ArtistCard: React.FC<EpisodeCardProps> = (props: EpisodeCardProps) => {
   return (
     <div className={Styles.episodeContainer} data-testid="episodeCard">
       <div className={Styles.imageContainer}>
@@ -31,4 +31,4 @@ const EpisodeCard: React.FC<EpisodeCardProps> = (props: EpisodeCardProps) => {
   )
 }
 
-export default EpisodeCard
+export default ArtistCard

@@ -1,22 +1,45 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IGetPodcastDetails } from '@/domain/usecases'
 
 import Styles from './styles.scss'
-import { EpisodeCard, Template } from '@/presentation/components'
+import { ArtistCard, Template } from '@/presentation/components'
+import { useParams } from 'react-router-dom'
+import { PodcastArtistModel, PodcastDetailsRequestModel } from '@/domain/models'
 
 type PodcastDetailsProps = {
   podcastDetails: (id: number) => IGetPodcastDetails
 }
 
+type ParamsProps = {
+  id: string
+}
+
 const PodcastDetails: React.FC<PodcastDetailsProps> = ({ podcastDetails }) => {
+  const { id } = useParams<ParamsProps>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [podcastInfo, setPodcastInfo] = useState<PodcastDetailsRequestModel>()
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const fetchData = async (): Promise<void> => {
+    await podcastDetails(Number(id))
+      .getDetails()
+      .then((response) => {
+        setPodcastInfo(response)
+        setIsLoading(false)
+      })
+      .catch((error) => console.error(error))
+  }
+
   return (
     <Template isLoading={isLoading}>
       <div className={Styles.container}>
-        <EpisodeCard />
+        <ArtistCard artist={podcastInfo?.results[0] as PodcastArtistModel} />
         <div className={Styles.episodeListContainer}>
           <div className={Styles.episodeCounter}>
-            <span>Episodes: 66</span>
+            <span>Episodes: {podcastInfo?.resultCount}</span>
           </div>
           <div className={Styles.tableContainer}>
             <table>

@@ -1,17 +1,17 @@
 import React from 'react'
 import { render, RenderResult } from '@testing-library/react'
-import { EpisodeCard } from '@/presentation/components'
+import { ArtistCard } from '@/presentation/components'
 import { PodcastArtistModel } from '@/domain/models'
 import { mockPodcastArtistModel } from '@/domain/test'
 
 const makeSut = (artist: PodcastArtistModel): RenderResult => {
-  return render(<EpisodeCard artist={artist} />)
+  return render(<ArtistCard artist={artist} />)
 }
 
-describe('EpisodeCard Component', () => {
-  test('renders EpisodeCard with correct data', () => {
+describe('ArtistCard Component', () => {
+  test('renders ArtistCard with correct data', () => {
     const { getByTestId } = makeSut(mockPodcastArtistModel())
-    const EpisodeCard = getByTestId('episodeCard') as HTMLInputElement
-    expect(EpisodeCard).toBeInTheDocument()
+    const ArtistCard = getByTestId('episodeCard') as HTMLInputElement
+    expect(ArtistCard).toBeInTheDocument()
   })
 })
