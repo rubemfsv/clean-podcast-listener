@@ -1,20 +1,91 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { IGetPodcastList } from '@/domain/usecases'
-import { Template } from '@/presentation/components'
+import {
+  Input,
+  PodcastCard,
+  Spinner,
+  Template,
+} from '@/presentation/components'
+import { ApiContext, FormContext } from '@/presentation/hooks'
 
 import Styles from './styles.scss'
+import { PodcastListRequestModel } from '@/domain/models'
+import { isDateOneMonthFromNow } from '@/presentation/utils'
 
 type HomeProps = {
   podcastList: IGetPodcastList
 }
 
 const Home: React.FC<HomeProps> = ({ podcastList }) => {
+  const { getLastPodcastListRequest, setLastPodcastListRequest } =
+    useContext(ApiContext)
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [podcasts, setPodcasts] = useState<PodcastListRequestModel>()
+  const [state, setState] = useState<{ searchField: string }>({
+    searchField: '',
+  })
+  const lastPodcastRequest = getLastPodcastListRequest()
+
+  useEffect(() => {
+    getPodcasts()
+  }, [])
+
+  const getPodcasts = async (): Promise<void> => {
+    const shouldRequest = isDateOneMonthFromNow(
+      lastPodcastRequest?.lastRequestDate
+    )
+    if (!shouldRequest) {
+      setPodcasts(lastPodcastRequest?.podcastList)
+      setIsLoading(false)
+      return
+    }
+
+    await podcastList
+      .getList()
+      .then((result) => {
+        setPodcasts(result)
+        setIsLoading(false)
+        setLastPodcastListRequest({
+          lastRequestDate: new Date(),
+          podcastList: result,
+        })
+      })
+      .catch((error) => console.error(error))
+  }
+
+  useEffect(() => {
+    console.log('state', state)
+  }, [state.searchField])
 
   return (
     <Template showHomeIcon={false} isLoading={isLoading}>
-      <span>Hello World!</span>
+      <div className={Styles.searchContainer}>
+        <FormContext.Provider value={{ state, setState }}>
+          <Input name="searchField" placeholder="Filter podcasts..." />
+        </FormContext.Provider>
+
+        <div className={Styles.counterContainer}>
+          <span>{podcasts?.feed?.entry?.length || 0}</span>
+        </div>
+      </div>
+      <div className={Styles.podcastList}>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          podcasts.feed.entry.map((podcast) => {
+            return (
+              <PodcastCard
+                key={podcast?.id?.label}
+                image={podcast['im:image'][0]?.label}
+                podcastName={podcast?.title?.label}
+                podcastAuthor={podcast['im:artist']?.label}
+                podcastId={podcast?.id?.attributes?.['im:id']}
+              />
+            )
+          })
+        )}
+      </div>
     </Template>
   )
 }

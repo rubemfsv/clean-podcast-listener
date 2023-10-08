@@ -1,21 +1,29 @@
 @import '../../styles/colors.scss';
 
-.container {
+.searchContainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row-reverse;
+  .counterContainer {
+    margin-right: 15px;
+    background-color: $blue;
+    padding: 5px 14px;
+    border-radius: 5px;
+    span {
+      color: $white;
+      font-weight: 700;
+      font-size: 14px;
+    }
+  }
+  .searchInput {
+    width: 300px;
+  }
+}
+
+.podcastList {
+  display: flex;
   justify-content: center;
-  height: 100vh;
-
-  img {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 30px;
-  }
-
-  span {
-    font-size: 26px;
-    color: $black;
-    font-weight: 700;
-  }
+  margin-top: 25px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 100px 40px;
 }
