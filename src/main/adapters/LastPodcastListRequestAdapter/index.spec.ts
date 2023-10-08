@@ -14,7 +14,6 @@ const lastRequest: LastPodcastRequestModel = {
 
 describe('LastPodcastListRequestAdapter', () => {
   test('Should call LocalStorageAdapter.set with correct values', () => {
-
     const setSpy = jest.spyOn(LocalStorageAdapter.prototype, 'set')
     setLastPodcastListRequestAdapter(lastRequest)
     expect(setSpy).toHaveBeenCalledWith('lastRequest', lastRequest)

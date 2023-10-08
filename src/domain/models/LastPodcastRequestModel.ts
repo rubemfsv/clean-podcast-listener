@@ -1,4 +1,4 @@
-import { PodcastListRequestModel } from "./PodcastListRequestModel"
+import { PodcastListRequestModel } from './PodcastListRequestModel'
 
 export type LastPodcastRequestModel = {
   lastRequestDate: Date
