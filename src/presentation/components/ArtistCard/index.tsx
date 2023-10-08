@@ -25,7 +25,12 @@ const ArtistCard: React.FC<EpisodeCardProps> = (props: EpisodeCardProps) => {
       </div>
       <div className={Styles.lastItemContainer}>
         <span>More info:</span>
-       <span> Click <a href={props?.artist?.collectionViewUrl} target='_blank'>here</a></span>
+        <span>
+          Click{' '}
+          <a href={props?.artist?.collectionViewUrl} target="_blank">
+            here
+          </a>
+        </span>
       </div>
     </div>
   )
