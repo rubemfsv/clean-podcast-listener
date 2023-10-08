@@ -1,0 +1,49 @@
+@import '../../styles/colors.scss';
+
+.episodeContainer {
+  border: 2px solid rgba($lightGrey, 0.6);
+  box-shadow: 5px 5px 10px rgba($grey, 0.5);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+
+  .imageContainer {
+    padding: 25px 0;
+    border-bottom: 1px solid rgba($lightGrey, 0.6);
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 220px;
+      height: 220px;
+    }
+  }
+  .episodeNameContainer {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba($lightGrey, 0.6);
+    padding: 20px 15px;
+
+    span:first-child {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    span:last-child {
+      font-style: italic;
+    }
+  }
+  .episodeDescriptionContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 15px;
+
+    span:first-child {
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    span:last-child {
+      font-style: italic;
+    }
+  }
+}
