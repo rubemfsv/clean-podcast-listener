@@ -55,7 +55,18 @@ const Home: React.FC<HomeProps> = ({ podcastList }) => {
   }
 
   useEffect(() => {
-    console.log('state', state)
+    if (!podcasts || !podcasts?.feed?.entry) getPodcasts()
+    const updatedLastPodcastRequest: PodcastListRequestModel = {
+      feed: {
+        ...lastPodcastRequest?.podcastList?.feed,
+        entry: lastPodcastRequest?.podcastList?.feed?.entry?.filter(
+          (podcast) => {
+            return podcast?.title?.label?.includes(state.searchField)
+          }
+        ),
+      },
+    }
+    setPodcasts(updatedLastPodcastRequest)
   }, [state.searchField])
 
   return (
@@ -73,7 +84,7 @@ const Home: React.FC<HomeProps> = ({ podcastList }) => {
         {isLoading ? (
           <Spinner />
         ) : (
-          podcasts.feed.entry.map((podcast) => {
+          podcasts?.feed?.entry?.map((podcast) => {
             return (
               <PodcastCard
                 key={podcast?.id?.label}
