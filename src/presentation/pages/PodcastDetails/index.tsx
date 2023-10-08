@@ -3,8 +3,9 @@ import { IGetPodcastDetails } from '@/domain/usecases'
 
 import Styles from './styles.scss'
 import { ArtistCard, Template } from '@/presentation/components'
-import { useParams } from 'react-router-dom'
-import { PodcastArtistModel, PodcastDetailsRequestModel } from '@/domain/models'
+import { useHistory, useParams } from 'react-router-dom'
+import { PodcastArtistModel, PodcastDetailsModel } from '@/domain/models'
+import { formatDate, millisecondsToMinutes } from '@/presentation/utils'
 
 type PodcastDetailsProps = {
   podcastDetails: (id: number) => IGetPodcastDetails
@@ -17,8 +18,14 @@ type ParamsProps = {
 const PodcastDetails: React.FC<PodcastDetailsProps> = ({ podcastDetails }) => {
   const { id } = useParams<ParamsProps>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [podcastInfo, setPodcastInfo] = useState<PodcastDetailsRequestModel>()
+  const [podcastArtist, setPodcastArtist] = useState<PodcastArtistModel>()
+  const [podcastEpisodes, setPodcastEpisodes] =
+    useState<PodcastDetailsModel[]>()
+  const history = useHistory()
 
+  const handleEpisodeSelection = (episodeId: number): void => {
+    history.push(`/podcast/${id}/episode/${episodeId}`)
+  }
   useEffect(() => {
     fetchData()
   }, [])
@@ -27,7 +34,13 @@ const PodcastDetails: React.FC<PodcastDetailsProps> = ({ podcastDetails }) => {
     await podcastDetails(Number(id))
       .getDetails()
       .then((response) => {
-        setPodcastInfo(response)
+        const result = response?.results
+        setPodcastArtist(
+          result.find((item) => item.kind === 'podcast') as PodcastArtistModel
+        )
+        setPodcastEpisodes(
+          result.filter((item) => item.kind === 'podcast-episode')
+        )
         setIsLoading(false)
       })
       .catch((error) => console.error(error))
@@ -36,10 +49,10 @@ const PodcastDetails: React.FC<PodcastDetailsProps> = ({ podcastDetails }) => {
   return (
     <Template isLoading={isLoading}>
       <div className={Styles.container}>
-        <ArtistCard artist={podcastInfo?.results[0] as PodcastArtistModel} />
+        <ArtistCard artist={podcastArtist} />
         <div className={Styles.episodeListContainer}>
           <div className={Styles.episodeCounter}>
-            <span>Episodes: {podcastInfo?.resultCount}</span>
+            <span>Episodes: {podcastEpisodes?.length}</span>
           </div>
           <div className={Styles.tableContainer}>
             <table>
@@ -51,16 +64,20 @@ const PodcastDetails: React.FC<PodcastDetailsProps> = ({ podcastDetails }) => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className={Styles.firstColumn}>Sample Title 1</td>
-                  <td>2023-10-12</td>
-                  <td>00:30:45</td>
-                </tr>
-                <tr>
-                  <td>Sample Title 2</td>
-                  <td>2023-10-15</td>
-                  <td>00:25:20</td>
-                </tr>
+                {podcastEpisodes?.map((episode) => {
+                  return (
+                    <tr
+                      key={episode?.trackId}
+                      onClick={() => handleEpisodeSelection(episode?.trackId)}
+                    >
+                      <td className={Styles.firstColumn}>
+                        {episode?.trackName}
+                      </td>
+                      <td>{formatDate(episode?.releaseDate)}</td>
+                      <td>{millisecondsToMinutes(episode?.trackTimeMillis)}</td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
