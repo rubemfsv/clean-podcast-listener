@@ -1,12 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 
 import { IGetPodcastList } from '@/domain/usecases'
-import {
-  Input,
-  PodcastCard,
-  Spinner,
-  Template,
-} from '@/presentation/components'
+import { Input, PodcastCard, Template } from '@/presentation/components'
 import { ApiContext, FormContext } from '@/presentation/hooks'
 
 import Styles from './styles.scss'
@@ -29,6 +24,7 @@ const Home: React.FC<HomeProps> = ({ podcastList }) => {
 
   useEffect(() => {
     getPodcasts()
+    console.count(`jere`)
   }, [])
 
   const getPodcasts = async (): Promise<void> => {
@@ -81,21 +77,17 @@ const Home: React.FC<HomeProps> = ({ podcastList }) => {
         </div>
       </div>
       <div className={Styles.podcastList}>
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          podcasts?.feed?.entry?.map((podcast) => {
-            return (
-              <PodcastCard
-                key={podcast?.id?.label}
-                image={podcast['im:image'][0]?.label}
-                podcastName={podcast?.title?.label}
-                podcastAuthor={podcast['im:artist']?.label}
-                podcastId={podcast?.id?.attributes?.['im:id']}
-              />
-            )
-          })
-        )}
+        {podcasts?.feed?.entry?.map((podcast) => {
+          return (
+            <PodcastCard
+              key={podcast?.id?.label}
+              image={podcast['im:image'][0]?.label}
+              podcastName={podcast?.title?.label}
+              podcastAuthor={podcast['im:artist']?.label}
+              podcastId={podcast?.id?.attributes?.['im:id']}
+            />
+          )
+        })}
       </div>
     </Template>
   )

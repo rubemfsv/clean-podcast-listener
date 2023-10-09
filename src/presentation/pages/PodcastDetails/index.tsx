@@ -19,7 +19,7 @@ type ParamsProps = {
 const PodcastDetails: React.FC<PodcastDetailsProps> = ({ podcastDetails }) => {
   const { id } = useParams<ParamsProps>()
   const { setLastPodcastDetailsRequest } = useContext(ApiContext)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [podcastArtist, setPodcastArtist] = useState<PodcastArtistModel>()
   const [podcastEpisodes, setPodcastEpisodes] =
     useState<PodcastDetailsModel[]>()
