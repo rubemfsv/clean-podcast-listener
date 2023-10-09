@@ -1,6 +1,10 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import { makeHome, makePodcastDetails } from '@/main/factories/pages'
+import {
+  makeHome,
+  makePodcastDetails,
+  makeEpisodeDetails,
+} from '@/main/factories/pages'
 import { ApiContext } from '@/presentation/hooks'
 import {
   getLastPodcastListRequestAdapter,
@@ -25,6 +29,11 @@ const Router: React.FC = () => {
         <Switch>
           <Route exact path="/" component={makeHome} />
           <Route exact path="/podcast/:id" component={makePodcastDetails} />
+          <Route
+            exact
+            path="/podcast/:id/episode/:id"
+            component={makeEpisodeDetails}
+          />
         </Switch>
       </BrowserRouter>
     </ApiContext.Provider>
