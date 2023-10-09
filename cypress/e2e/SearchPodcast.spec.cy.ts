@@ -1,11 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Main route flow', () => {
-  it('should check if has 100 podcasts displayed', () => {
-    cy.visit(Cypress.env('baseUrl') + '/')
-    cy.get('[data-testid="podcastCard"]').should('have.length', 100)
-  })
-
+describe('Search Podcast flow', () => {
   it('should search podcast and display correct infos', () => {
     cy.visit(Cypress.env('baseUrl') + '/')
     cy.get('[data-testid="searchField"]').click().type('friday')
