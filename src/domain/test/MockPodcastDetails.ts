@@ -11,7 +11,7 @@ const mockPodcasEpisodeGenreModel = (): PodcastEpisodeGenreModel => ({
   id: faker.lorem.word(),
 })
 
-const mockPodcastDetailsModel = (): PodcastDetailsModel => ({
+export const mockPodcastDetailsModel = (): PodcastDetailsModel => ({
   country: faker.address.countryCode(),
   episodeUrl: faker.internet.url(),
   trackTimeMillis: faker.datatype.number(),
