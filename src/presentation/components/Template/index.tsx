@@ -25,8 +25,10 @@ const Template: React.FC<TemplateProps> = ({
   return (
     <>
       <div className={Styles.header}>
-        <h1 className={Styles.title}>Podcaster</h1>
-        {isLoading && <Spinner />}
+        <h1 className={Styles.title} onClick={() => handleMenuRoute()}>
+          Podcaster
+        </h1>
+        {isLoading && <Spinner  />}
         {showHomeIcon && !isLoading && (
           <FaHome
             onClick={() => handleMenuRoute()}
@@ -35,7 +37,13 @@ const Template: React.FC<TemplateProps> = ({
           />
         )}
       </div>
-      <div className={Styles.content}>{children}</div>
+      {isLoading ? (
+        <div className={Styles.spinnerContainer}>
+          <Spinner  />
+        </div>
+      ) : (
+        <div className={Styles.content}>{children}</div>
+      )}
     </>
   )
 }
