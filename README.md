@@ -2,10 +2,9 @@
 
 Deployed on Netlify, check out the live demo [here](https://main--cheery-shortbread-5efb5b.netlify.app/).
 
-##  **Installation**
+## **Installation**
 
 **You must first have installed [NodeJS](https://nodejs.org/), [Yarn](https://yarnpkg.com/) is optional, and then:**
-
 
 Step 1:
 
@@ -37,7 +36,6 @@ In the package.json file, there are scripts that you can run with node and yarn
 ## **Architecture**
 
 The architecture used in this project was the [Clean Architecture](https://dev.to/rubemfsv/clean-architecture-the-concept-behind-the-code-52do), using the concepts proposed by Robert Martin.
-
 
 ```
 cypress/
@@ -77,6 +75,7 @@ src/
     test/
     utils/
 ```
+
 <br />
 
 **Home Page**
@@ -117,5 +116,3 @@ src/
 
 <hr />
 <br />
-
-
