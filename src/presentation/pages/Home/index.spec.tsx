@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
-import { render } from '@testing-library/react'
+import { render, act, waitFor } from '@testing-library/react'
 import { Home } from '@/presentation/pages'
 import { ApiContext } from '@/presentation/hooks'
 import { LastPodcastRequestModel } from '@/domain/models'
@@ -41,11 +41,12 @@ const makeSystemUnderTest = (): SutTypes => {
 }
 
 describe('Home Component', () => {
-  test('Should show 100 podcasts checking cache before', () => {
+  test('Should show 100 podcasts checking cache before', async () => {
     const { podcastListSpy, getLastPodcastListRequestMock } =
       makeSystemUnderTest()
-
-    expect(getLastPodcastListRequestMock).toBeCalled()
-    expect(podcastListSpy?.podcasts?.feed?.entry?.length).toBe(100)
+    await act( () => {
+      expect(getLastPodcastListRequestMock).toBeCalled()
+      expect(podcastListSpy?.podcasts?.feed?.entry?.length).toBe(100)
+    })
   })
 })
