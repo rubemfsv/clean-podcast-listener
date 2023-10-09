@@ -44,7 +44,7 @@ describe('Home Component', () => {
   test('Should show 100 podcasts checking cache before', async () => {
     const { podcastListSpy, getLastPodcastListRequestMock } =
       makeSystemUnderTest()
-    await act( () => {
+    await act(() => {
       expect(getLastPodcastListRequestMock).toBeCalled()
       expect(podcastListSpy?.podcasts?.feed?.entry?.length).toBe(100)
     })

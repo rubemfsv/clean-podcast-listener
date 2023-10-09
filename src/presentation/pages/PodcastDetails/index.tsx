@@ -76,6 +76,7 @@ const PodcastDetails: React.FC<PodcastDetailsProps> = ({ podcastDetails }) => {
                   return (
                     <tr
                       key={episode?.trackId}
+                      data-testid="episodeRow"
                       onClick={() => handleEpisodeSelection(episode?.trackId)}
                     >
                       <td className={Styles.firstColumn}>

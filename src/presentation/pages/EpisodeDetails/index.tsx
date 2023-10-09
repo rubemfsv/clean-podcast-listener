@@ -29,7 +29,7 @@ const EpisodeDetails: React.FC<EpisodeDetailsProps> = ({}) => {
             <h1>{selectedEpisode?.trackName}</h1>
             <span>{selectedEpisode?.description}</span>
             <div className={Styles.audioContainer}>
-              <audio controls>
+              <audio controls data-testid="audioPlayer">
                 <source src={selectedEpisode?.previewUrl} type="audio/mpeg" />
               </audio>
             </div>
