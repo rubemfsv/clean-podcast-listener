@@ -4,7 +4,11 @@ import { IGetPodcastDetails } from '@/domain/usecases'
 import Styles from './styles.scss'
 import { ArtistCard, Template } from '@/presentation/components'
 import { useHistory, useParams } from 'react-router-dom'
-import { PodcastArtistModel, PodcastDetailsModel } from '@/domain/models'
+import {
+  PodcastArtistModel,
+  PodcastDetailsModel,
+  PodcastDetailsRequestModel,
+} from '@/domain/models'
 import { formatDate, millisecondsToMinutes } from '@/presentation/utils'
 import { ApiContext } from '@/presentation/hooks'
 
@@ -36,20 +40,25 @@ const PodcastDetails: React.FC<PodcastDetailsProps> = ({ podcastDetails }) => {
     await podcastDetails(Number(id))
       .getDetails()
       .then((response) => {
-        const result = response?.results
-        const artist = result.find(
-          (item) => item.kind === 'podcast'
-        ) as PodcastArtistModel
-        const episodes = result.filter(
-          (item) => item.kind === 'podcast-episode'
-        )
-        setPodcastArtist(artist)
-        setPodcastEpisodes(episodes)
-        setLastPodcastDetailsRequest({
-          lastArtist: artist,
-          lastPodcastEpisodes: episodes,
-        })
-        setIsLoading(false)
+        if (response) {
+          const parsedResult: PodcastDetailsRequestModel = JSON.parse(
+            response?.contents as unknown as string
+          )
+          const result = parsedResult?.results
+          const artist = result.find(
+            (item) => item.kind === 'podcast'
+          ) as PodcastArtistModel
+          const episodes = result.filter(
+            (item) => item.kind === 'podcast-episode'
+          )
+          setPodcastArtist(artist)
+          setPodcastEpisodes(episodes)
+          setLastPodcastDetailsRequest({
+            lastArtist: artist,
+            lastPodcastEpisodes: episodes,
+          })
+          setIsLoading(false)
+        }
       })
       .catch((error) => console.error(error))
   }

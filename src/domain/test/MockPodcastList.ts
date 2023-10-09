@@ -1,6 +1,11 @@
 import faker from 'faker'
 import { GetPodcastList } from '../usecases'
-import { ImageDetailsModel, PodcastLinkModel, PodcastModel } from '../models'
+import {
+  ImageDetailsModel,
+  PodcastLinkModel,
+  PodcastListRequestModel,
+  PodcastModel,
+} from '../models'
 
 const mockPodcasImageDetailsModel = (): ImageDetailsModel => ({
   label: faker.internet.url(),
@@ -73,7 +78,11 @@ const mockPodcastModel = (): PodcastModel => ({
   },
 })
 
-export const mockGetPodcastListModel = (): GetPodcastList.Model => ({
+export const mockGetPodcastListRequestModel = (): GetPodcastList.Model => ({
+  contents: mockGetPodcastListModel(),
+})
+
+export const mockGetPodcastListModel = (): PodcastListRequestModel => ({
   feed: {
     author: {
       name: {

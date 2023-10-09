@@ -1,8 +1,8 @@
-import { mockGetPodcastListModel } from '@/domain/test'
+import { mockGetPodcastListRequestModel } from '@/domain/test'
 import { GetPodcastList, IGetPodcastList } from '@/domain/usecases'
 
 export class PodcastListSpy implements IGetPodcastList {
-  podcasts = mockGetPodcastListModel()
+  podcasts = mockGetPodcastListRequestModel()
   callsCount = 0
 
   async getList(): Promise<GetPodcastList.Model> {

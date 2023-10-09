@@ -46,7 +46,7 @@ describe('Home Component', () => {
       makeSystemUnderTest()
     await act(() => {
       expect(getLastPodcastListRequestMock).toBeCalled()
-      expect(podcastListSpy?.podcasts?.feed?.entry?.length).toBe(100)
+      expect(podcastListSpy?.podcasts?.contents?.feed?.entry?.length).toBe(100)
     })
   })
 })

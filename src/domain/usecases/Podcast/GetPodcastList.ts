@@ -5,5 +5,5 @@ export interface IGetPodcastList {
 }
 
 export namespace GetPodcastList {
-  export type Model = PodcastListRequestModel
+  export type Model = { contents: PodcastListRequestModel }
 }

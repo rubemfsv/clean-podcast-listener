@@ -24,7 +24,7 @@ const Home: React.FC<HomeProps> = ({ podcastList }) => {
 
   useEffect(() => {
     getPodcasts()
-  }, [])
+  }, [podcastList])
 
   const getPodcasts = async (): Promise<void> => {
     const shouldRequest = isDateOneMonthFromNow(
@@ -39,12 +39,17 @@ const Home: React.FC<HomeProps> = ({ podcastList }) => {
     await podcastList
       .getList()
       .then((result) => {
-        setPodcasts(result)
-        setIsLoading(false)
-        setLastPodcastListRequest({
-          lastRequestDate: new Date(),
-          podcastList: result,
-        })
+        if (result) {
+          const parsedResult: PodcastListRequestModel = JSON.parse(
+            result?.contents as unknown as string
+          )
+          setPodcasts(parsedResult)
+          setIsLoading(false)
+          setLastPodcastListRequest({
+            lastRequestDate: new Date(),
+            podcastList: parsedResult,
+          })
+        }
       })
       .catch((error) => console.error(error))
   }

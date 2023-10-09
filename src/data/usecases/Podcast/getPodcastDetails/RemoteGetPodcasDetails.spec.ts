@@ -4,7 +4,7 @@ import {
 } from './RemoteGetPodcastDetails'
 import { HttpClientSpy } from '@/data/test'
 import { HttpStatusCode } from '@/data/protocols/http/'
-import { mockGetPodcastDetailsModel } from '@/domain/test/'
+import { mockGetPodcastDetailsRequestModel } from '@/domain/test/'
 import { UnexpectedError } from '@/domain/errors/'
 import faker from 'faker'
 
@@ -37,7 +37,7 @@ describe('RemoteGetPodcastDetails', () => {
 
   test('Should return an PodcastDetails.Model if HttpPostClient returns 200', async () => {
     const { systemUnderTest, httpClientSpy } = makeSystemUnderTest()
-    const httpResult = mockGetPodcastDetailsModel()
+    const httpResult = mockGetPodcastDetailsRequestModel()
     httpClientSpy.response = {
       statusCode: HttpStatusCode.ok,
       body: httpResult,

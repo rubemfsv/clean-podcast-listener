@@ -5,5 +5,5 @@ export interface IGetPodcastDetails {
 }
 
 export namespace GetPodcastDetails {
-  export type Model = PodcastDetailsRequestModel
+  export type Model = { contents: PodcastDetailsRequestModel }
 }

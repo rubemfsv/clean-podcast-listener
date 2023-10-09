@@ -3,6 +3,7 @@ import { GetPodcastDetails } from '../usecases'
 import {
   PodcastArtistModel,
   PodcastDetailsModel,
+  PodcastDetailsRequestModel,
   PodcastEpisodeGenreModel,
 } from '../models'
 
@@ -67,7 +68,12 @@ export const mockPodcastArtistModel = (): PodcastArtistModel => ({
   ] as PodcastEpisodeGenreModel[] & string[],
 })
 
-export const mockGetPodcastDetailsModel = (): GetPodcastDetails.Model => ({
+export const mockGetPodcastDetailsRequestModel =
+  (): GetPodcastDetails.Model => ({
+    contents: mockGetPodcastDetailsModel(),
+  })
+
+export const mockGetPodcastDetailsModel = (): PodcastDetailsRequestModel => ({
   resultCount: faker.datatype.number(),
   results: [
     mockPodcastArtistModel(),
