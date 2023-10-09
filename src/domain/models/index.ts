@@ -1,3 +1,4 @@
+export * from './LastPodcastDetailsModel'
 export * from './LastPodcastRequestModel'
 export * from './PodcastArtistModel'
 export * from './PodcastEpisodeModel'
