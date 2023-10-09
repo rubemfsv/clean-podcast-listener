@@ -24,7 +24,6 @@ const Home: React.FC<HomeProps> = ({ podcastList }) => {
 
   useEffect(() => {
     getPodcasts()
-    console.count(`jere`)
   }, [])
 
   const getPodcasts = async (): Promise<void> => {
