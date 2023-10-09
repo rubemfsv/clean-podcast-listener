@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Listen Podcast flow', () => {
+describe('Listen Podcast Flow', () => {
   it('should go to episode page and check if the audio player is correct', () => {
     cy.visit(Cypress.env('baseUrl') + '/')
     cy.get('[data-testid="podcastCard"]').eq(0).click()

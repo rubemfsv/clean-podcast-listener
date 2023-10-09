@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Search Podcast flow', () => {
+describe('Search Podcast Flow', () => {
   it('should search podcast and display correct infos', () => {
     cy.visit(Cypress.env('baseUrl') + '/')
     cy.get('[data-testid="searchField"]').click().type('friday')
