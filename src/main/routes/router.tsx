@@ -5,7 +5,9 @@ import { ApiContext } from '@/presentation/hooks'
 import {
   getLastPodcastListRequestAdapter,
   setLastPodcastListRequestAdapter,
-} from '../adapters/LastPodcastListRequestAdapter'
+  setLastPodcastDetailsRequestAdapter,
+  getLastPodcastDetailsRequestAdapter,
+} from '../adapters/'
 
 import '@/presentation/styles/global.scss'
 
@@ -15,6 +17,8 @@ const Router: React.FC = () => {
       value={{
         setLastPodcastListRequest: setLastPodcastListRequestAdapter,
         getLastPodcastListRequest: getLastPodcastListRequestAdapter,
+        setLastPodcastDetailsRequest: setLastPodcastDetailsRequestAdapter,
+        getLastPodcastDetailsRequest: getLastPodcastDetailsRequestAdapter,
       }}
     >
       <BrowserRouter>
