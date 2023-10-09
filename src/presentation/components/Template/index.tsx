@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { FaHome } from 'react-icons/fa'
+import { FaArrowLeft } from 'react-icons/fa'
 
 import Styles from './styles.scss'
 import Spinner from '../Spinner'
@@ -22,24 +22,33 @@ const Template: React.FC<TemplateProps> = ({
     history.replace('/')
   }
 
+  const handleBack = (): void => {
+    history.goBack()
+  }
+
   return (
     <>
       <div className={Styles.header}>
-        <h1 className={Styles.title} onClick={() => handleMenuRoute()}>
+        <h1
+          className={Styles.title}
+          onClick={() => handleMenuRoute()}
+          data-testid="title"
+        >
           Podcaster
         </h1>
-        {isLoading && <Spinner  />}
+        {isLoading && <Spinner />}
         {showHomeIcon && !isLoading && (
-          <FaHome
-            onClick={() => handleMenuRoute()}
+          <FaArrowLeft
+            onClick={() => handleBack()}
             className={Styles.icon}
             title="Home"
+            data-testid="backIcon"
           />
         )}
       </div>
       {isLoading ? (
         <div className={Styles.spinnerContainer}>
-          <Spinner  />
+          <Spinner />
         </div>
       ) : (
         <div className={Styles.content}>{children}</div>
