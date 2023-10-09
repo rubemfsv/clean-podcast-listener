@@ -56,7 +56,9 @@ const Home: React.FC<HomeProps> = ({ podcastList }) => {
         ...lastPodcastRequest?.podcastList?.feed,
         entry: lastPodcastRequest?.podcastList?.feed?.entry?.filter(
           (podcast) => {
-            return podcast?.title?.label?.includes(state.searchField)
+            return podcast?.title?.label
+              ?.toLowerCase()
+              .includes(state.searchField.toLowerCase())
           }
         ),
       },
