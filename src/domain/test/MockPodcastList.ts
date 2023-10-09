@@ -83,7 +83,7 @@ export const mockGetPodcastListModel = (): GetPodcastList.Model => ({
         label: faker.lorem.words(5),
       },
     },
-    entry: [mockPodcastModel(), mockPodcastModel(), mockPodcastModel()],
+    entry: Array.from({ length: 100 }, () => mockPodcastModel()),
     updated: {
       label: faker.lorem.words(5),
     },
