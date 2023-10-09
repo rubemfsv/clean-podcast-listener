@@ -42,7 +42,8 @@ const makeSystemUnderTest = (): SutTypes => {
 
 describe('Home Component', () => {
   test('Should show 100 podcasts checking cache before', () => {
-    const { podcastListSpy, getLastPodcastListRequestMock } = makeSystemUnderTest()
+    const { podcastListSpy, getLastPodcastListRequestMock } =
+      makeSystemUnderTest()
 
     expect(getLastPodcastListRequestMock).toBeCalled()
     expect(podcastListSpy?.podcasts?.feed?.entry?.length).toBe(100)
