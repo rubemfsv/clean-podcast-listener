@@ -5,56 +5,30 @@
   flex-direction: row;
   justify-content: center;
   margin-top: 10px;
-  .episodeListContainer {
+  .episodeDetailsContainer {
+    height: 100px;
+  }
+  .episodeDetails {
     margin-left: 70px;
-    .episodeCounter {
-      box-shadow: 5px 5px 10px rgba($grey, 0.5);
-      padding: 10px 20px;
-      margin-bottom: 20px;
-      span {
-        font-size: 20px;
-        font-weight: 700;
-      }
+    padding: 20px;
+    width: 700px;
+    min-height: 100%;
+    box-shadow: 5px 5px 10px rgba($grey, 0.5);
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 14px;
     }
-    .tableContainer {
-      padding: 20px;
-      box-shadow: 5px 5px 10px rgba($grey, 0.5);
 
-      table {
-        border-collapse: collapse;
-        width: 700px;
-      }
+    span {
+      text-align: right;
+    }
 
-      .firstColumn {
-        width: 60%;
-      }
+    .audioContainer {
+      margin-top: 40px;
+      audio {
 
-      th,
-      td {
-        padding: 8px;
-        text-align: left;
-      }
-
-      th {
-        background-color: $white;
-        border-bottom: 2px solid rgba($lightGrey, 0.6);
-      }
-
-      tr:nth-child(even) {
-        background-color: $white;
-      }
-
-      tr:nth-child(odd) {
-        background-color: $mediumWhite;
-      }
-
-      tr:hover {
-        background-color: $lightGrey;
-        cursor: pointer;
-      }
-
-      td {
-        color: $blue;
+        width: 650px;
       }
     }
   }
