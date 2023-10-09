@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { IGetPodcastDetails } from '@/domain/usecases'
 
 import Styles from './styles.scss'
@@ -6,6 +6,7 @@ import { ArtistCard, Template } from '@/presentation/components'
 import { useHistory, useParams } from 'react-router-dom'
 import { PodcastArtistModel, PodcastDetailsModel } from '@/domain/models'
 import { formatDate, millisecondsToMinutes } from '@/presentation/utils'
+import { ApiContext } from '@/presentation/hooks'
 
 type PodcastDetailsProps = {
   podcastDetails: (id: number) => IGetPodcastDetails
@@ -17,6 +18,7 @@ type ParamsProps = {
 
 const PodcastDetails: React.FC<PodcastDetailsProps> = ({ podcastDetails }) => {
   const { id } = useParams<ParamsProps>()
+  const { setLastPodcastDetailsRequest } = useContext(ApiContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [podcastArtist, setPodcastArtist] = useState<PodcastArtistModel>()
   const [podcastEpisodes, setPodcastEpisodes] =
@@ -35,12 +37,18 @@ const PodcastDetails: React.FC<PodcastDetailsProps> = ({ podcastDetails }) => {
       .getDetails()
       .then((response) => {
         const result = response?.results
-        setPodcastArtist(
-          result.find((item) => item.kind === 'podcast') as PodcastArtistModel
+        const artist = result.find(
+          (item) => item.kind === 'podcast'
+        ) as PodcastArtistModel
+        const episodes = result.filter(
+          (item) => item.kind === 'podcast-episode'
         )
-        setPodcastEpisodes(
-          result.filter((item) => item.kind === 'podcast-episode')
-        )
+        setPodcastArtist(artist)
+        setPodcastEpisodes(episodes)
+        setLastPodcastDetailsRequest({
+          lastArtist: artist,
+          lastPodcastEpisodes: episodes,
+        })
         setIsLoading(false)
       })
       .catch((error) => console.error(error))
